@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHolder>{
@@ -47,7 +49,7 @@ public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHold
         }
 
         public void bind(Movie movie) {
-            poster.setImageResource(movie.poster);
+            Glide.with(super.itemView).load(movie.url).into(poster);
             movieName.setText(movie.name);
         }
     }

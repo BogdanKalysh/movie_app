@@ -1,11 +1,10 @@
 package com.example.imagelist;
 
 public class Movie {
-    public String name;
-    int poster;
+    public String name, url;
 
-    public Movie(String name, int poster) {
+    public Movie(String name, String url) {
         this.name = name;
-        this.poster = poster;
+        this.url = url;
     }
 }

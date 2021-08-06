@@ -19,33 +19,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView movieRV = findViewById(R.id.activity_main__movie_list);
-        movies = generateMovieList();
-        movieRV.setAdapter(new MoviesAdapter(movies));
+        movieRV.setAdapter(new MoviesAdapter(generateMovieList(16)));
         movieRV.setLayoutManager(new GridLayoutManager(this,2));
     }
 
-    private List<Movie> generateMovieList() {
+    private List<Movie> generateMovieList(int n) {
         List<Movie> movieList = new ArrayList<>();
-
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-        movieList.add(new Movie("The great movie number one", R.drawable.icon));
-        movieList.add(new Movie("A little bit less interesting movie", R.drawable.icon));
-        movieList.add(new Movie("Kinda ok movie to watch", R.drawable.icon));
-
+        for (int i = 1; i <= n; i++)
+            movieList.add(new Movie("The image number " + i, "https://picsum.photos/id/"+ i +"/200/300"));
         return movieList;
     }
 }
