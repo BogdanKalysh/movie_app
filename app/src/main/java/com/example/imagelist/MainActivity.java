@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView movieRV = findViewById(R.id.activity_main__movie_list);
-        movieRV.setAdapter(new MoviesAdapter(generateMovieList(16)));
+        movieRV.setAdapter(new MoviesAdapter(generateMovieList(17)));
         movieRV.setLayoutManager(new GridLayoutManager(this,2));
     }
 

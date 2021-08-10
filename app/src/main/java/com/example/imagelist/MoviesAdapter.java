@@ -7,9 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.imagelist.databinding.MovieItemBinding;
 
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHold
     @NonNull
     @Override
     public MovieHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent,false);
         return new MovieHolder(view);
     }
 
@@ -39,18 +42,20 @@ public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHold
     }
 
     class MovieHolder extends RecyclerView.ViewHolder {
-        private ImageView poster;
-        private TextView movieName;
+        private MovieItemBinding movieBinding;
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
-            poster = itemView.findViewById(R.id.movie_item__image);
-            movieName = itemView.findViewById(R.id.movie_item__movie_name);
+            movieBinding = DataBindingUtil.bind(itemView);
         }
 
         public void bind(Movie movie) {
-            Glide.with(super.itemView).load(movie.url).into(poster);
-            movieName.setText(movie.name);
+            movieBinding.setMovie(movie);
         }
+    }
+
+    @BindingAdapter("ImageUrl")
+    public static void loadImage(ImageView view, String url){
+        Glide.with(view.getContext()).load(url).into(view);
     }
 }
