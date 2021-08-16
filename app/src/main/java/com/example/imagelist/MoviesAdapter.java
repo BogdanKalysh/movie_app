@@ -19,9 +19,14 @@ import java.util.List;
 public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHolder>{
     private List<Movie> movieList;
 
-    public MoviesAdapter(List<Movie> movieList) {
+    public void setMovieList(List<Movie> movieList) {
         this.movieList = movieList;
+        notifyDataSetChanged();
     }
+
+//    public MoviesAdapter(List<Movie> movieList) {
+//        this.movieList = movieList;
+//    }
 
     @NonNull
     @Override

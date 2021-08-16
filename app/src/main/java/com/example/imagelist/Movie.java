@@ -7,4 +7,17 @@ public class Movie {
         this.name = name;
         this.url = url;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+
+        if(!(obj instanceof Movie)) {
+            return false;
+        }
+
+        Movie movie = (Movie)obj;
+        return this.name.equals(movie.name) && this.url.equals(movie.name);
+    }
 }
