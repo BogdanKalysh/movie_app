@@ -1,6 +1,7 @@
 package com.example.imagelist;
 
 import android.os.CountDownTimer;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDao {
-    private final MutableLiveData<List<Movie>> movieList = new MutableLiveData<List<Movie>>();
+    private final MutableLiveData<List<Movie>> movieList;
     private int numOfMovie;
     private final CountDownTimer timer = new CountDownTimer(5000, 1) {
         @Override
@@ -33,14 +34,13 @@ public class MovieDao {
     }
 
     public MovieDao() {
-        movieList.setValue(generateMovieList(10));
-        startAutoAdding();
+        movieList = new MutableLiveData<List<Movie>>(generateMovieList(10));;
     }
 
     public void delete(Movie movie) {
         List<Movie> tmpMovies = movieList.getValue();
         tmpMovies.remove(movie);
-        movieList.setValue(tmpMovies);
+        movieList.postValue(tmpMovies);
     }
 
     public void startAutoAdding() {

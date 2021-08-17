@@ -16,9 +16,21 @@ public class MoviesViewModel extends ViewModel {
         return movieList;
     }
 
+    public MovieRepository getRepository() {
+        return repository;
+    }
+
     public MoviesViewModel() {
         repository = new MovieRepository();
         movieList = repository.getMovieList();
+    }
+
+    public void startAutoAdding() {
+        repository.startAutoAdding();
+    }
+
+    public void stopAutoAdding() {
+        repository.stopAutoAdding();
     }
 
     public void delete(Movie movie) {

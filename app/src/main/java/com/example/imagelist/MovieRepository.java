@@ -3,7 +3,6 @@ package com.example.imagelist;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -18,6 +17,12 @@ public class MovieRepository {
     public LiveData<List<Movie>> getMovieList() {
         return movieList;
     }
+
+    public void startAutoAdding() {
+        movieDao.startAutoAdding();
+    }
+
+    public void stopAutoAdding() {movieDao.stopAutoAdding();}
 
     private static class DeleteMovieAsyncTask extends AsyncTask <Movie, Void, Void>{
         private MovieDao movieDao;

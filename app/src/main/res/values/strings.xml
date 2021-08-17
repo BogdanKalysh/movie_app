@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ImageList</string>
+    <string name="checkbox_text">Auto add images</string>
 </resources>
