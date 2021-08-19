@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         movieRV.setAdapter(adapter);
 
         viewModel.getMovieList().observe(this, movieList -> {
-            adapter.submitList(new ArrayList<Movie>(movieList));
+//            adapter.setList(new ArrayList<Movie>(movieList));
+            adapter.setList(movieList);
             adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                 @Override
                 public void onItemRangeInserted(int positionStart, int itemCount) {

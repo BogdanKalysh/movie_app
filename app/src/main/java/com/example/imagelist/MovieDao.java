@@ -22,7 +22,7 @@ public class MovieDao {
 
         @Override
         public void onFinish() {
-            List<Movie> tmpMovies = movieList.getValue();
+            List<Movie> tmpMovies = new ArrayList<Movie>(movieList.getValue());
             tmpMovies.add(generateMovie());
             movieList.setValue(tmpMovies);
 
@@ -45,7 +45,7 @@ public class MovieDao {
     }
 
     public void delete(Movie movie) {
-        List<Movie> tmpMovies = movieList.getValue();
+        List<Movie> tmpMovies = new ArrayList<Movie>(movieList.getValue());
         tmpMovies.remove(movie);
         movieList.setValue(tmpMovies);
     }
@@ -60,9 +60,9 @@ public class MovieDao {
 
     @NonNull
     private List<Movie> generateMovieList(int n) {
-        List<Movie> movieList = new ArrayList<>();
+        List<Movie> movieList = new ArrayList<Movie>();
         for (int i = 1; i <= n; i++)
-            movieList.add(new Movie("The movie number " + ++numOfMovie, "https://picsum.photos/id/" + numOfMovie + "/200/300"));
+            movieList.add(generateMovie());
         return movieList;
     }
 

@@ -17,27 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.imagelist.databinding.MovieItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHolder> {
+    private List<Movie> movieList;
     private MovieRepository repository;
 
     protected MoviesAdapter(MovieRepository repository) {
-        super(DIFF_CALLBACK);
+        movieList = new ArrayList<Movie>();
         this.repository = repository;
     }
-
-    private static final DiffUtil.ItemCallback<Movie> DIFF_CALLBACK = new DiffUtil.ItemCallback<Movie>() {
-        @Override
-        public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.getUrl().equals(newItem.getUrl());
-        }
-
-        @Override
-        public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
-            return oldItem.equals(newItem);
-        }
-    };
 
     @NonNull
     @Override
@@ -48,8 +38,24 @@ public class MoviesAdapter extends ListAdapter<Movie, MoviesAdapter.MovieHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
-        Movie movie = getItem(position);
+        Movie movie = movieList.get(position);
         holder.bind(movie);
+    }
+
+    @Override
+    public int getItemCount() {
+        return movieList.size();
+    }
+
+    public void setList(List<Movie> movieList) {
+        MovieDiffUtilCallback differ = new MovieDiffUtilCallback(this.movieList, movieList);
+        DiffUtil.DiffResult movieDiffResult = DiffUtil.calculateDiff(differ);
+
+        System.out.println(this.movieList.size());
+        System.out.println(movieList.size());
+
+        this.movieList = movieList;
+        movieDiffResult.dispatchUpdatesTo(this);
     }
 
     class MovieHolder extends RecyclerView.ViewHolder {
