@@ -1,8 +1,5 @@
 package com.example.imagelist;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,7 +7,7 @@ import java.util.List;
 
 public class MoviesViewModel extends ViewModel {
     private MovieRepository repository;
-    private AutoImageAdder autoAdder;
+    private AutoItemAdder autoAdder;
     private LiveData<List<Movie>> movieList;
 
     public LiveData<List<Movie>> getMovieList() {
@@ -23,7 +20,7 @@ public class MoviesViewModel extends ViewModel {
 
     public MoviesViewModel() {
         repository = new MovieRepository();
-        autoAdder = new AutoImageAdder();
+        autoAdder = new AutoItemAdder();
         movieList = repository.getMovieList();
     }
 

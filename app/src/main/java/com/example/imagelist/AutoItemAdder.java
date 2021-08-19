@@ -1,6 +1,6 @@
 package com.example.imagelist;
 
-public class AutoImageAdder {
+public class AutoItemAdder {
     MovieDao dao = MovieDao.getInstance();
 
     public void startAutoAdding() {
