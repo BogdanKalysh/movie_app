@@ -30,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel.getMovieList().observe(this, movieList -> {
             adapter.submitList(new ArrayList<Movie>(movieList));
+            adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onItemRangeInserted(int positionStart, int itemCount) {
+                    movieRV.scrollToPosition(positionStart);
+                }
+            });
         });
 
         AppCompatCheckBox autoAddCheckbox = (AppCompatCheckBox) findViewById(R.id.activity_main__auto_add_checkbox);

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDao {
+    private static MovieDao instance;
     private final MutableLiveData<List<Movie>> movieList;
     private int numOfMovie;
     private final CountDownTimer timer = new CountDownTimer(5000, 1) {
@@ -33,14 +34,20 @@ public class MovieDao {
         return movieList;
     }
 
-    public MovieDao() {
+    public static MovieDao getInstance() {
+        if(instance == null)
+            instance = new MovieDao();
+        return instance;
+    }
+
+    private MovieDao() {
         movieList = new MutableLiveData<List<Movie>>(generateMovieList(10));;
     }
 
     public void delete(Movie movie) {
         List<Movie> tmpMovies = movieList.getValue();
         tmpMovies.remove(movie);
-        movieList.postValue(tmpMovies);
+        movieList.setValue(tmpMovies);
     }
 
     public void startAutoAdding() {
