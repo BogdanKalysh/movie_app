@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
+
         AppCompatCheckBox autoAddCheckbox = (AppCompatCheckBox) findViewById(R.id.activity_main__auto_add_checkbox);
+        autoAddCheckbox.setChecked(viewModel.getAutoAddingState().getValue());
+
         autoAddCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (autoAddCheckbox.isChecked())
-                    viewModel.startAutoAdding();
-                else
-                    viewModel.stopAutoAdding();
+                viewModel.setAutoAddingState(autoAddCheckbox.isChecked());
             }
         });
     }

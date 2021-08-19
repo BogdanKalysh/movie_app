@@ -14,26 +14,19 @@ public class MovieDao {
     private static MovieDao instance;
     private final MutableLiveData<List<Movie>> movieList;
     private int numOfMovie;
-    private final CountDownTimer timer = new CountDownTimer(5000, 1) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-
-        }
-
-        @Override
-        public void onFinish() {
-            add(generateMovie());
-            start();
-        }
-    };
 
     public MutableLiveData<List<Movie>> getMovieList() {
         return movieList;
     }
 
     public static MovieDao getInstance() {
-        if(instance == null)
-            instance = new MovieDao();
+        if (instance == null) {
+            synchronized(MovieDao.class) {
+                if (instance == null) {
+                    instance = new MovieDao();
+                }
+            }
+        }
         return instance;
     }
 
@@ -53,14 +46,6 @@ public class MovieDao {
         movieList.setValue(tmpMovies);
     }
 
-    public void startAutoAdding() {
-        timer.start();
-    }
-
-    public void stopAutoAdding() {
-        timer.cancel();
-    }
-
     @NonNull
     private List<Movie> generateMovieList(int n) {
         List<Movie> movieList = new ArrayList<Movie>();
@@ -70,7 +55,7 @@ public class MovieDao {
     }
 
     @NonNull
-    private Movie generateMovie() {
+    public Movie generateMovie() {
         return new Movie("The movie number " + ++numOfMovie, "https://picsum.photos/id/" + numOfMovie + "/200/300");
     }
 }
