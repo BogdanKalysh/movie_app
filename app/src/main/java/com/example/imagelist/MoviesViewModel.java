@@ -13,11 +13,13 @@ public class MoviesViewModel extends ViewModel {
     private LiveData<List<Movie>> movieList;
 
     public void setAutoAddingState(boolean state) {
-        autoAddingState.setValue(state);
-        if(state)
-            startAutoAdding();
-        else
-            stopAutoAdding();
+        if(state != autoAddingState.getValue()) {
+            autoAddingState.setValue(state);
+            if (state)
+                startAutoAdding();
+            else
+                stopAutoAdding();
+        }
     }
 
     public LiveData<List<Movie>> getMovieList() {

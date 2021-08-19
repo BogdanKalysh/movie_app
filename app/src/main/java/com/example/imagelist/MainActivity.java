@@ -38,9 +38,10 @@ public class MainActivity extends AppCompatActivity {
             });
         });
 
-
         AppCompatCheckBox autoAddCheckbox = (AppCompatCheckBox) findViewById(R.id.activity_main__auto_add_checkbox);
-        autoAddCheckbox.setChecked(viewModel.getAutoAddingState().getValue());
+        viewModel.getAutoAddingState().observe(this, autoAddingState -> {
+            autoAddCheckbox.setChecked(autoAddingState);
+        });
 
         autoAddCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
