@@ -51,9 +51,6 @@ public class MoviesAdapter extends RecyclerView.Adapter <MoviesAdapter.MovieHold
         MovieDiffUtilCallback differ = new MovieDiffUtilCallback(this.movieList, movieList);
         DiffUtil.DiffResult movieDiffResult = DiffUtil.calculateDiff(differ);
 
-        System.out.println(this.movieList.size());
-        System.out.println(movieList.size());
-
         this.movieList = movieList;
         movieDiffResult.dispatchUpdatesTo(this);
     }

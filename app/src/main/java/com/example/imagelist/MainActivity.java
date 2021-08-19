@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         movieRV.setAdapter(adapter);
 
         viewModel.getMovieList().observe(this, movieList -> {
-//            adapter.setList(new ArrayList<Movie>(movieList));
             adapter.setList(movieList);
             adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
                 @Override
@@ -43,11 +42,10 @@ public class MainActivity extends AppCompatActivity {
         autoAddCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (autoAddCheckbox.isChecked()) {
+                if (autoAddCheckbox.isChecked())
                     viewModel.startAutoAdding();
-                } else {
+                else
                     viewModel.stopAutoAdding();
-                }
             }
         });
     }

@@ -22,10 +22,7 @@ public class MovieDao {
 
         @Override
         public void onFinish() {
-            List<Movie> tmpMovies = new ArrayList<Movie>(movieList.getValue());
-            tmpMovies.add(generateMovie());
-            movieList.setValue(tmpMovies);
-
+            add(generateMovie());
             start();
         }
     };
@@ -42,6 +39,12 @@ public class MovieDao {
 
     private MovieDao() {
         movieList = new MutableLiveData<List<Movie>>(generateMovieList(10));;
+    }
+
+    public void add(Movie movie) {
+        List<Movie> tmpMovies = new ArrayList<Movie>(movieList.getValue());
+        tmpMovies.add(movie);
+        movieList.setValue(tmpMovies);
     }
 
     public void delete(Movie movie) {
