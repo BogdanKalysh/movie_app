@@ -19,10 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/checkbox_text"
+            android:checked="@{viewModel.autoAddingState}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onCheckedChanged="@{() -> viewModel.setAutoAddingState(activityMainAutoAddCheckbox.isChecked())}"/>
+            android:onCheckedChanged="@{() -> viewModel.autoAddingStateChanged(activityMainAutoAddCheckbox.isChecked())}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_main__movie_list"

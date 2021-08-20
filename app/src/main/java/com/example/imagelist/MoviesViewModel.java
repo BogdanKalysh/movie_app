@@ -12,14 +12,11 @@ public class MoviesViewModel extends ViewModel {
     private MutableLiveData<Boolean> autoAddingState;
     private LiveData<List<Movie>> movieList;
 
-    public void setAutoAddingState(boolean state) {
-        if(state != autoAddingState.getValue()) {
-            autoAddingState.setValue(state);
-            if (state)
-                startAutoAdding();
-            else
-                stopAutoAdding();
-        }
+    public MoviesViewModel() {
+        autoAddingState = new MutableLiveData<Boolean>(false);
+        repository = new MovieRepository();
+        autoAdder = new AutoItemAdder();
+        movieList = repository.getMovieList();
     }
 
     public LiveData<List<Movie>> getMovieList() {
@@ -34,12 +31,16 @@ public class MoviesViewModel extends ViewModel {
         return autoAddingState;
     }
 
-    public MoviesViewModel() {
-        autoAddingState = new MutableLiveData<Boolean>(false);
-        repository = new MovieRepository();
-        autoAdder = new AutoItemAdder();
-        movieList = repository.getMovieList();
+    public void autoAddingStateChanged(boolean state) {
+        if(state != autoAddingState.getValue()) {
+            autoAddingState.setValue(state);
+            if (state)
+                startAutoAdding();
+            else
+                stopAutoAdding();
+        }
     }
+
 
     public void startAutoAdding() {
         autoAdder.startAutoAdding();

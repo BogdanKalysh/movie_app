@@ -9,12 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.CompoundButton;
 
 import com.example.imagelist.databinding.ActivityMainBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private MoviesViewModel viewModel;
@@ -41,8 +37,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         });
-
-        AppCompatCheckBox autoAddCheckbox = (AppCompatCheckBox) findViewById(R.id.activity_main__auto_add_checkbox);
-        viewModel.getAutoAddingState().observe(this, autoAddCheckbox::setChecked);
     }
 }
